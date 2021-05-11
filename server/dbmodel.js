@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const keys = require('./api_keys.js');
+const keys = require('../api_keys.js');
 const MONGO_URI = keys.mongoURI;
 
 mongoose

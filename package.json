@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production nodemon server/server.js",
     "build": "webpack --mode production",
-    "dev": "webpack serve --mode development & nodemon -r dotenv/config server/server.js"
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open --hot\" \"nodemon ./server/server.js\"",
+    "gulp-prod": "node_modules/.bin/gulp prod",
+    "gulp-dev": "node_modules/.bin/gulp dev"
   },
   "repository": {
     "type": "git",
@@ -43,6 +45,8 @@
     "@babel/preset-env": "^7.14.1",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
+    "concurrently": "^6.1.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",

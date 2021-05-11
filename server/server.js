@@ -7,7 +7,7 @@ const app = express();
 const plaid = require('plaid');
 const port = 3000;
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const keys = require('./api_keys.js');
+const keys = require('../api_keys.js');
 require('dotenv').config();
 const { User, Item, Account, Security, Holding } = require('./dbmodel');
 const plaidRouter = require('./plaidRouter');
