@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Table } from 'react-bootstrap';
+import { Card, Container, Table, Button } from 'react-bootstrap';
 
 const dataFromJSON = require('../json_from_plaid/investments-holdings-get.json');
 
@@ -93,6 +93,24 @@ const AssetsCard = () => {
     return totals
   }
 
+  function myToggleFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function myToggleFunction2() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
 //numbers to be formatted by formatter
 const securitiesOnlyTotal = amassSecuritiesHoldings()
 const accountOnlyHoldings = amassAccountHoldings()
@@ -112,6 +130,9 @@ const Assetotal = formatter.format(total)
   return (
         <Card>
           <Card.Header>Assets</Card.Header>
+          <div align="center">{`Total: ${Assetotal}`}</div> 
+          <Button variant="dark" width={4} onClick={e => myToggleFunction(e)}>Click here to details!</Button>
+          <div id="myDIV">
           <Table striped bordered hover >
             <thead>
               <tr>
@@ -143,7 +164,8 @@ const Assetotal = formatter.format(total)
             </tr>
             </tbody>
           </Table>
-          <Table striped bordered hover >
+          </div>
+          <Table responsive striped bordered hover >
           <thead>
               <tr>
                 <th>Holdings</th>
@@ -171,7 +193,7 @@ const Assetotal = formatter.format(total)
             </tr>
             </tbody>
           </Table >
-          <Card.Footer >{`Combined Total: ${Assetotal}`}</Card.Footer>
+          {/* <Card.Footer >{`Combined Total: ${Assetotal}`}</Card.Footer> */}
         </Card>
    
   )

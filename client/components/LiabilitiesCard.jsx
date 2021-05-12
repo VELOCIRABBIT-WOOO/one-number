@@ -34,6 +34,7 @@ const LiabiltiesCard = () => {
   return (
     <Card className='h-100'>
       <Card.Header>Liabilities</Card.Header>
+      <div align="center">{`Total: ${LiabilityTotal}`}</div> 
       <Table striped bordered hover>
       <thead>
         <tr>
@@ -63,7 +64,7 @@ const LiabiltiesCard = () => {
           
       </tbody>
       </Table>
-      <Card.Footer >{`Combined Total: ${LiabilityTotal}`}</Card.Footer>
+      {/* <Card.Footer >{`Combined Total: ${LiabilityTotal}`}</Card.Footer> */}
     </Card>
   );
 };
