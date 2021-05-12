@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Container, Table, Button } from 'react-bootstrap';
-
+import React, { useState, useEffect } from "react";
+import { Card, Container, Table } from "react-bootstrap";
 
 const dataFromJSON = require("../json_from_plaid/investments-holdings-get.json");
 
@@ -87,11 +86,11 @@ const AssetsCard = () => {
 
   const amassSecuritiesHoldings = () => {
     let totals = 0;
-     groupedSecurities.forEach(el => {
-       totals += el.value
-     })
-    return totals
-  }
+    groupedSecurities.forEach((el) => {
+      totals += el.value;
+    });
+    return totals;
+  };
 
   function myToggleFunction() {
     var x = document.getElementById("myDIV");
@@ -101,107 +100,6 @@ const AssetsCard = () => {
       x.style.display = "none";
     }
   }
-
-  function myToggleFunction2() {
-    var x = document.getElementById("myDIV");
-    if (x.style.display === "none") {
-      x.style.display = "block";
-    } else {
-      x.style.display = "none";
-    }
-  }
-
-//numbers to be formatted by formatter
-const securitiesOnlyTotal = amassSecuritiesHoldings()
-const accountOnlyHoldings = amassAccountHoldings()
-const total = amassTotals()
-
-const formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-  maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-});
-
-const securitiesHoldings = formatter.format(securitiesOnlyTotal)
-const accountTotals = formatter.format(accountOnlyHoldings)
-const Assetotal = formatter.format(total)
-  
- 
-  return (
-        <Card>
-          <Card.Header>Assets</Card.Header>
-          <div align="center">{`Total: ${Assetotal}`}</div> 
-          <Button variant="dark" width={4} onClick={e => myToggleFunction(e)}>Click here to details!</Button>
-          <div id="myDIV">
-          <Table striped bordered hover >
-            <thead>
-              <tr>
-                <th>Account</th>
-                <th>Balance</th>
-              </tr>
-            </thead>
-            <tbody>
-                {accounts
-                  .filter(
-                    (el) => el.type === 'depository' || el.type === 'investment')
-                  .map((asset) => {
-                    let dollarUSLocale = Intl.NumberFormat('en-US',{
-                      style: "currency",
-                      currency: "USD",
-                      maximumFractionDigits: 2
-                    })
-                    let price = dollarUSLocale.format(asset.balances.current)
-                    return [
-                      <tr key={asset.name}>
-                        <td>{asset.name.slice(6)}: </td>
-                        <td>{price}</td>
-                      </tr>,
-                    ];
-                  })}
-                     <tr>
-              <td>Total:</td>
-              <td>{accountTotals}</td>
-            </tr>
-            </tbody>
-          </Table>
-          </div>
-          <Table responsive striped bordered hover >
-          <thead>
-              <tr>
-                <th>Holdings</th>
-                <th>Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              {groupedSecurities.map((asset) => {
-                 let dollarUSLocale = Intl.NumberFormat('en-US',{
-                  style: "currency",
-                  currency: "USD",
-                  maximumFractionDigits: 2
-                })
-                let price = dollarUSLocale.format(asset.value)
-                return [
-                  <tr key={asset.name}>
-                    <td>{asset.name}:</td>
-                    <td>{price}</td>
-                  </tr>
-                ]
-              })}
-              <tr>
-              <td>Total:</td>
-              <td>{securitiesHoldings}</td>
-            </tr>
-            </tbody>
-          </Table >
-          {/* <Card.Footer >{`Combined Total: ${Assetotal}`}</Card.Footer> */}
-        </Card>
-   
-  )
-    groupedSecurities.forEach((el) => {
-      totals += el.value;
-    });
-    return totals;
-  };
 
   //numbers to be formatted by formatter
   const securitiesOnlyTotal = amassSecuritiesHoldings();
@@ -222,6 +120,8 @@ const Assetotal = formatter.format(total)
     <Card className='h-100' border="success" style={{ padding: '0.5rem' }}>
       <Card.Header align='center'><h5>Assets</h5></Card.Header>
       <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
+      {/* <Button variant="dark" width={4} onClick={e => myToggleFunction(e)}>Click here to details!</Button>
+      <div id="myDIV"> */}
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -283,6 +183,7 @@ const Assetotal = formatter.format(total)
         </tbody>
       </Table>
       {/* <Card.Footer>{`Combined Total: ${Assetotal}`}</Card.Footer> */}
+      {/* </div> */}
     </Card>
   );
 };
