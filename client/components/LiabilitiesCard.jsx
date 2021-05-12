@@ -15,6 +15,7 @@ const LiabiltiesCard = () => {
   .filter((el) => el.type === 'loan' || el.type === 'credit')
     .forEach((el) => {
       totals += el.balances.current;
+      console.log("This is the data we're receving from static JSON", dataFromJSON);
     });
 
     return totals
@@ -32,9 +33,9 @@ const LiabiltiesCard = () => {
   const LiabilityTotal = formatter.format(total)
 
   return (
-    <Card className='h-100'>
-      <Card.Header>Liabilities</Card.Header>
-      <div align="center">{`Total: ${LiabilityTotal}`}</div> 
+    <Card className='h-100' border="danger" style={{ padding: '0.5rem' }}>
+      <Card.Header align='center'><h5>Liabilities</h5></Card.Header>
+      <div align='center'><h6>{`Total: ${LiabilityTotal}`}</h6></div>
       <Table striped bordered hover>
       <thead>
         <tr>

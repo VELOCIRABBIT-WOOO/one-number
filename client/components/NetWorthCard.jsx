@@ -91,15 +91,15 @@ const net = formatter.format(netWorth)
 
 
   return (
-      <Card>
-          <Card.Header>OneNumber</Card.Header>
+      <Card  border="dark" style={{ padding: '0.5rem' }}>
+          <Card.Header align='center'><h5>OneNumber</h5></Card.Header>
           <Table striped bordered hover >
-            <thead>
+            <thead align='center'>
               <tr>
                 <th>Total</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody align='center'>
               <tr>
                 <td>{net}</td>
               </tr>

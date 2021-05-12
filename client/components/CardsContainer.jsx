@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardGroup, Container, Row, Col } from 'react-bootstrap';
+import { CardGroup, Container, Row, Col, Grow } from 'react-bootstrap';
 import AssetsCard from './AssetsCard.jsx';
 import LiabilitiesCard from './LiabilitiesCard.jsx';
 import NetWorthCard from './NetWorthCard.jsx';

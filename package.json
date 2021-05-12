@@ -7,30 +7,35 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=production nodemon server/server.js",
     "build": "webpack --mode production",
-    "dev": "webpack serve --mode development & nodemon -r dotenv/config server/server.js"
+    "dev": "cross-env NODE_ENV=development concurrently \"nodemon -r dotenv/config server/server.js\" \"webpack serve --open --hot\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Wunderpus-Photogenicus-Smith/one-number.git"
+    "url": "git+https://github.com/VELOCIRABBIT-WOOO/one-number.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Wunderpus-Photogenicus-Smith/one-number/issues"
+    "url": "https://github.com/VELOCIRABBIT-WOOO/issues"
   },
-  "homepage": "https://github.com/Wunderpus-Photogenicus-Smith/one-number#readme",
+  "homepage": "https://github.com/VELOCIRABBIT-WOOO/one-number#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^5.0.0",
+    "concurrently": "^6.1.0",
     "cookie-session": "^1.4.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^9.0.1",
+    "eslint": "^7.26.0",
     "express": "^4.17.1",
     "mongoose": "^5.12.7",
     "passport": "^0.4.1",
     "passport-google-oauth": "^2.0.0",
     "pg": "^8.6.0",
     "plaid": "^8.4.0",
+    "prettier": "^2.3.0",
+    "prettier-eslint": "^12.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.2",
@@ -43,9 +48,16 @@
     "@babel/preset-env": "^7.14.1",
     "@babel/preset-react": "^7.13.13",
     "babel-loader": "^8.2.2",
+    "concurrently": "^6.1.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.4",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
+    "image-minimizer-webpack-plugin": "^2.2.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-jpegtran": "^7.0.0",
+    "imagemin-optipng": "^8.0.0",
+    "imagemin-svgo": "^9.0.0",
     "nodemon": "^2.0.7",
     "style-loader": "^2.0.0",
     "webpack": "^5.36.2",
