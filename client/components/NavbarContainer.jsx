@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { useState } from 'react';
+import logo from '../src/logo.png';
 import {
   Navbar,
   Nav,
@@ -10,7 +11,6 @@ import {
   FormControl,
 } from 'react-bootstrap';
 import PlaidLinkButton from './SpaceFiller.jsx';
-
 
 const NavbarContainer = () => {
   const [user, setUser] = useState('');
@@ -31,10 +31,10 @@ const NavbarContainer = () => {
           <Nav>
             <Nav.Link
               href="/auth/logout"
-              className="btn float-right"
-              style={{ float: 'right' }}
+              // className="btn"
+              // style={{ float: 'right' }}
             >
-              Logout
+              &nbsp; Logout &nbsp; 
             </Nav.Link>
             <PlaidLinkButton />
           </Nav>
@@ -51,18 +51,18 @@ const NavbarContainer = () => {
     }
   };
 
-  // useEffect(() => {
+  
 
-  // }, [])
-  // console.log('this is the func');
   getAuthedStatus();
   return (
     <div>
-      <Navbar bg="primary" expand="lg" className="p-2" variant="dark">
-        <Navbar.Brand href="/landing">OneNumber</Navbar.Brand>
+      <Navbar bg="dark"  expand="lg" className="p-2" variant="dark">
+      <img src={logo} alt='logo' height='60' 
+        className="d-inline-block align-top" padding={4}/>
+        <Navbar.Brand href="/landing"> About Us</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <div>{renderContent(user)}</div>
+          <div align="right" >{renderContent(user)}</div>
         </Navbar.Collapse>
       </Navbar>
     </div>

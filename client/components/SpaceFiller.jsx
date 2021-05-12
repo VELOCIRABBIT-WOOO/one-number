@@ -24,12 +24,12 @@ const SpaceFiller = (props) => {
               }),
             })
               .then((data) => data.json())
-              .then((resp) => console.log(resp))
+              .then((resp) => console.log(resp))  // ! Make sure it's recorded in the State
               .catch((e) => console.log(e));
           },
           onLoad: () => {},
           onExit: (error, metadata) => {
-            // console.log('error occured on plaid create');
+      
             // Save data from the onExit handler
             supportHandler.report({
               error: error,
@@ -61,7 +61,7 @@ const SpaceFiller = (props) => {
         />
       </Helmet>
       {/* <button onClick={() => console.log('test')}>button</button> */}
-      <Button type="submit" onClick={createPlaidStuff}>
+      <Button type="submit" onClick={createPlaidStuff} variant='light'>
         Connect a bank account
       </Button>
     </div>

@@ -108,8 +108,9 @@ const AssetsCard = () => {
   const Assetotal = formatter.format(total);
 
   return (
-    <Card>
-      <Card.Header>Assets</Card.Header>
+    <Card className='h-100' border="success" style={{ padding: '0.5rem' }}>
+      <Card.Header align='center'><h5>Assets</h5></Card.Header>
+      <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -142,7 +143,7 @@ const AssetsCard = () => {
           </tr>
         </tbody>
       </Table>
-      <Table striped bordered hover>
+      <Table striped bordered hover style={{ width: '100%' }}>
         <thead>
           <tr>
             <th>Holdings</th>
@@ -170,7 +171,7 @@ const AssetsCard = () => {
           </tr>
         </tbody>
       </Table>
-      <Card.Footer>{`Combined Total: ${Assetotal}`}</Card.Footer>
+      {/* <Card.Footer>{`Combined Total: ${Assetotal}`}</Card.Footer> */}
     </Card>
   );
 };
