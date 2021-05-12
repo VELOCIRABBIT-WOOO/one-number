@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "react-bootstrap";
-import { usePlaidLink } from "react-plaid-link";
-import { Helmet } from "react-helmet";
-import LiabiltiesCard from "./LiabilitiesCard"
+import React from 'react';
+import { CardGroup, Container, Row, Col, Grow } from 'react-bootstrap';
+import LiabilitiesCard from './LiabilitiesCard.jsx';
 
-const DashboardPage = (props) => {
-  
 
+const LiabilitiesPage = () => {
   return (
-    <h1>test - Dashboard page</h1>
+    <Container>
+      <LiabilitiesCard />
+    </Container>
   );
 };
 
-export default DashboardPage;
+export default LiabilitiesPage;

@@ -3,7 +3,8 @@ import { CardGroup, Container, Row, Col, Grow } from 'react-bootstrap';
 import AssetsCard from './AssetsCard.jsx';
 import LiabilitiesCard from './LiabilitiesCard.jsx';
 import NetWorthCard from './NetWorthCard.jsx';
-const CardsContainer = () => {
+
+const CardsContainer = (props) => {
   return (
     <Container>
       <Row className='m-2'>
@@ -19,6 +20,7 @@ const CardsContainer = () => {
         </Col>
         {/* </CardGroup> */}
       </Row>
+
     </Container>
   );
 };

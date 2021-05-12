@@ -21,6 +21,9 @@ module.exports = {
       "/secret": "http://localhost:3000",
       "/landing": "http://localhost:3000",
       "/dashboard": "http://localhost:3000",
+      "/assets": "http://localhost:3000",
+      "/liabilities": "http://localhost:3000",
+      "/markets": "http://localhost:3000",
     },
   },
   module: {

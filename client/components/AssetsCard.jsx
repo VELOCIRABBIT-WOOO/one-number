@@ -202,6 +202,7 @@ const AssetsCard = () => {
   );
 };
 
+// export default Assetotal;
 export default AssetsCard;
 
 // groupedSecurities.map((asset) => {

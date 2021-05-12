@@ -34,9 +34,16 @@ app.get("/secret", authController.isUserAuthenticated, (req, res) => {
     res.send("no user found");
   }
 });
+
+const ourUri = ['/landing', '/assets', '/liabilities', '/markets'];
+ourUri.map((url) => app.get(url, (req, res) => {
+  res.sendFile(path.join(__dirname, "./../build/index.html"));
+}));
+
 app.get("/", (req, res) => {
   res.redirect("/landing");
 });
+
 app.get("/dashboard", (req, res) => {
   if (req.user) {
     res.sendFile(path.join(__dirname, "./../build/index.html"));
@@ -45,19 +52,7 @@ app.get("/dashboard", (req, res) => {
   }
 });
 
-// // below added on my end
-// app.get("/assets", (req, res) => {
-//   if (req.user) {
-//     res.sendFile(path.join(__dirname, "./../build/index.html"));
-//   } else {
-//     res.redirect("/assets");
-//   }
-// });
 
-
-app.get("/landing", (req, res) => {
-  res.sendFile(path.join(__dirname, "./../build/index.html"));
-});
 passport.use(
   new GoogleStrategy(
     {

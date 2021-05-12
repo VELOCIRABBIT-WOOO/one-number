@@ -61,7 +61,7 @@ const NavbarContainer = () => {
       <Navbar bg="dark"  expand="lg" className="p-2" variant="dark">
       <img src={logo} alt='logo' height='60' 
         className="d-inline-block align-top" padding={4}/>
-        <Navbar.Brand href="/landing"> About Us</Navbar.Brand>
+        {/* <Navbar.Brand href="/landing"> About Us</Navbar.Brand> */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <div align="right" >{renderContent(user)}</div>

@@ -94,11 +94,11 @@ const net = formatter.format(netWorth)
       <Card  border="dark" style={{ padding: '0.5rem' }}>
           <Card.Header align='center'><h5>OneNumber</h5></Card.Header>
           <Table striped bordered hover >
-            <thead align='center'>
+            {/* <thead align='center'>
               <tr>
                 <th>Total</th>
               </tr>
-            </thead>
+            </thead> */}
             <tbody align='center'>
               <tr>
                 <td>{net}</td>
