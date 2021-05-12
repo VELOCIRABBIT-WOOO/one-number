@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Card, Container, Table } from "react-bootstrap";
+import { Card, Container, Table, Button } from "react-bootstrap";
 
 const dataFromJSON = require("../json_from_plaid/investments-holdings-get.json");
 
@@ -14,6 +14,7 @@ const AssetsCard = () => {
   //         })
   //         .catch(err => console.log(err));
   // }, []);
+
 
   const accounts = dataFromJSON.holdings.accounts;
   const holdings = dataFromJSON.holdings.holdings;
@@ -101,6 +102,15 @@ const AssetsCard = () => {
     }
   }
 
+  function myToggleFunction2() {
+    var x = document.getElementById("myDIV2");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
   //numbers to be formatted by formatter
   const securitiesOnlyTotal = amassSecuritiesHoldings();
   const accountOnlyHoldings = amassAccountHoldings();
@@ -116,12 +126,13 @@ const AssetsCard = () => {
   const accountTotals = formatter.format(accountOnlyHoldings);
   const Assetotal = formatter.format(total);
 
+  
   return (
     <Card className='h-100' border="success" style={{ padding: '0.5rem' }}>
       <Card.Header align='center'><h5>Assets</h5></Card.Header>
       <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
-      {/* <Button variant="dark" width={4} onClick={e => myToggleFunction(e)}>Click here to details!</Button>
-      <div id="myDIV"> */}
+      <Button variant="dark" width={4} onClick={e => myToggleFunction(e)}>Account Details</Button>
+      <div id="myDIV">
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -154,6 +165,10 @@ const AssetsCard = () => {
           </tr>
         </tbody>
       </Table>
+      </div>
+      <Button variant="dark" width={4} onClick={e => myToggleFunction2(e)}>Holdings Details</Button> 
+      <div id="myDIV2">
+
       <Table striped bordered hover style={{ width: '100%' }}>
         <thead>
           <tr>
@@ -182,8 +197,7 @@ const AssetsCard = () => {
           </tr>
         </tbody>
       </Table>
-      {/* <Card.Footer>{`Combined Total: ${Assetotal}`}</Card.Footer> */}
-      {/* </div> */}
+      </div>
     </Card>
   );
 };

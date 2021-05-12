@@ -60,7 +60,6 @@ const SpaceFiller = (props) => {
           type="text/javascript"
         />
       </Helmet>
-      {/* <button onClick={() => console.log('test')}>button</button> */}
       <Button type="submit" onClick={createPlaidStuff} variant='light'>
         Connect a bank account
       </Button>

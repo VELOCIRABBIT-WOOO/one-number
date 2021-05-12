@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react';
-import { Card, Container, Table } from 'react-bootstrap';
+import { Card, Container, Table, Button } from 'react-bootstrap';
 
 const dataFromJSON = require('../json_from_plaid/investments-holdings-get.json');
 
@@ -30,12 +30,23 @@ const LiabiltiesCard = () => {
     maximumFractionDigits: 2, // (causes 2500.99 to be printed as $2,501)
   });
   
+  function myToggleFunction3() {
+    var x = document.getElementById("myDIV3");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
   const LiabilityTotal = formatter.format(total)
 
   return (
     <Card className='h-100' border="danger" style={{ padding: '0.5rem' }}>
       <Card.Header align='center'><h5>Liabilities</h5></Card.Header>
       <div align='center'><h6>{`Total: ${LiabilityTotal}`}</h6></div>
+      <Button variant="dark" width={4} onClick={e => myToggleFunction3(e)}>Liabilities Details</Button>
+      <div id="myDIV3">
       <Table striped bordered hover>
       <thead>
         <tr>
@@ -65,7 +76,7 @@ const LiabiltiesCard = () => {
           
       </tbody>
       </Table>
-      {/* <Card.Footer >{`Combined Total: ${LiabilityTotal}`}</Card.Footer> */}
+      </div>
     </Card>
   );
 };

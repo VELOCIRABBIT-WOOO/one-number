@@ -29,10 +29,12 @@ const NavbarContainer = () => {
       return (
         <div>
           <Nav>
+            <Nav.Link href="/assets">Assets</Nav.Link>
+            <Nav.Link href="/liabilities">Liabilites</Nav.Link>
+            <Nav.Link href="/dashboard">Dashboard</Nav.Link>
+            <Nav.Link href="/markets">Markets</Nav.Link>
             <Nav.Link
               href="/auth/logout"
-              // className="btn"
-              // style={{ float: 'right' }}
             >
               &nbsp; Logout &nbsp; 
             </Nav.Link>
