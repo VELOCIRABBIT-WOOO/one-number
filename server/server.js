@@ -44,6 +44,17 @@ app.get("/dashboard", (req, res) => {
     res.redirect("/landing");
   }
 });
+
+// // below added on my end
+// app.get("/assets", (req, res) => {
+//   if (req.user) {
+//     res.sendFile(path.join(__dirname, "./../build/index.html"));
+//   } else {
+//     res.redirect("/assets");
+//   }
+// });
+
+
 app.get("/landing", (req, res) => {
   res.sendFile(path.join(__dirname, "./../build/index.html"));
 });
