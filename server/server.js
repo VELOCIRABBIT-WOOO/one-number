@@ -71,19 +71,14 @@ passport.use(
             });
         }
       });
-      // console.log("access token: ", accessToken);
-      // console.log("profile: ");
-      // console.log(profile);
       done(null, profile); // TODO add the user to the database here with upsert, or insert on conflict do nothing sql
     }
   )
 );
 passport.serializeUser((user, done) => {
-  // console.log("serialize user is called");
   done(null, user.id); // this user is coming from the done function passed from returning from the db
 });
 passport.deserializeUser((id, done) => {
-  // console.log("deserialize user is called");
   // find from the database and send user data here
   done(null, id); // this user is coming from the done function passed from returning from the db
 });

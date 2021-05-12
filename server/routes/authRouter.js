@@ -3,8 +3,6 @@ var router = express.Router();
 const passport = require("passport");
 
 router.get("/google/callback", passport.authenticate("google"), (req, res) => {
-  console.log("this is the req.user");
-  console.log(req.user);
   res.redirect("/dashboard");
 });
 
