@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { usePlaidLink } from "react-plaid-link";
 import { Helmet } from "react-helmet";
-import AssetsCard from "./AssetsCard"
+import AssetsCard from "./AssetsCard.jsx"
 
 const AssestPage = (props) => {
   

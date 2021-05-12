@@ -12,7 +12,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardsContainer from './components/CardsContainer.jsx';
 import LandingContainer from './components/LandingContainer.jsx';
-import AssestsPage from './components/AssestsPage'
+import AssestsPage from './components/AssestsPage.jsx';
 
 // if we putcards and space filler into one component called dashboard we can use that as a route
 const Dashboard = () => {
