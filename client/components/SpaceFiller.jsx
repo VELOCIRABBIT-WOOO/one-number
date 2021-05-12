@@ -15,9 +15,19 @@ const SpaceFiller = (props) => {
         const handler = Plaid.create({
           token: linkToken,
           onSuccess: (public_token, metadata) => {
-            // console.log('testing if onsuccess got called');
-            console.log(public_token);
-            console.log(metadata);
+            fetch('/plaid/plaid_token_exchange', {
+              method: "POST",
+              headers: {
+                'Content-Type' : "application/json",
+              },
+              body: JSON.stringify({
+                public_token,
+                metadata,
+              })
+            }).then((data) => data.json())
+            .then(resp => setState(resp))
+            .catch(e => console.log(e));
+          
           },
           onLoad: () => {
 
