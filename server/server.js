@@ -9,6 +9,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("../api_keys.js");
 require("dotenv").config();
 const { User, Item, Account, Security, Holding } = require("./dbmodel");
+const plaid = require("plaid");
 const plaidRouter = require("./routes/plaidRouter");
 const authRouter = require("./routes/authRouter");
 const authController = require("./controllers/authController");
@@ -21,7 +22,15 @@ app.use(
     keys: [keys.session.cookieKey],
   })
 );
+
 app.use("/plaid", plaidRouter);
+
+const client = new plaid.Client({
+  clientID: process.env.PLAID_CLIENT_ID,
+  secret: process.env.PLAID_SECRET,
+  env: plaid.environments.development,
+});
+
 // ---------------------oauth
 app.use(passport.initialize());
 app.use(passport.session());
@@ -39,6 +48,7 @@ app.get("/", (req, res) => {
 });
 app.get("/dashboard", (req, res) => {
   if (req.user) {
+    res.cookie('google_id',req.user);
     res.sendFile(path.join(__dirname, "./../build/index.html"));
   } else {
     res.redirect("/landing");
@@ -58,6 +68,19 @@ passport.use(
       User.findOne({ google_id: profile.id }).then((currentUser) => {
         if (currentUser) {
           //if we already have a record with the given profile ID
+          const {access_token} = currentUser;
+          client.getTransactions(
+            access_token,
+            "2021-05-11",
+            "2021-05-11",
+            (err, result) => {
+              if(err !== null) console.log(err);
+              else{
+                console.log('Balance: ',result.accounts[0].balances.current)
+                console.log('Transactions: ',result.item)
+              }
+            }
+          );
           done(null, currentUser);
         } else {
           //if not, create a new user
