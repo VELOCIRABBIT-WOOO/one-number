@@ -128,7 +128,7 @@ const AssetsCard = () => {
 
   
   return (
-    <Card border="success" style={{ padding: '0.5rem' }}>
+    <Card className='h-100' border="success" style={{ padding: '0.5rem' }}>
       <Card.Header align='center'><h5>Assets</h5></Card.Header>
       <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
       <Button variant="dark" width={4} onClick={e => myToggleFunction(e)}>Account Details</Button>
@@ -202,7 +202,7 @@ const AssetsCard = () => {
   );
 };
 
-// export default Assetotal;
+export { Assetotal;
 export default AssetsCard;
 
 // groupedSecurities.map((asset) => {
