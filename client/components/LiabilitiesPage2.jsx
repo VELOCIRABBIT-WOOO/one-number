@@ -1,6 +1,9 @@
-
 import React, {useState} from 'react';
-import { Card, Container, Table, Button } from 'react-bootstrap';
+import { Card, Container, Table, Button, Row, Col } from 'react-bootstrap';
+
+import Chart1 from './Chart1.jsx';
+import Chart2 from './Chart2.jsx';
+import Chart3 from './Chart3.jsx';
 
 const dataFromJSON = require('../json_from_plaid/investments-holdings-get.json');
 
@@ -47,6 +50,15 @@ const LiabiltiesCard = () => {
   const handleShow = () => setShow(true);
 
   return (
+    <Container align="center">
+      <Row className='m-2' align="center">
+        <Col lg={4} md={10} sm={12} xs={12}>
+          <Chart3 />
+          <Chart2 />
+          <Chart1 />
+        </Col>
+        <Col lg={8} md={10} sm={12} xs={12}>
+
     <Card border="danger" style={{ padding: '0.5rem' }}>
       <Card.Header align='center'><h5>Liabilities</h5></Card.Header>
       <div align='center'><h6>{`Total: ${LiabilityTotal}`}</h6></div>
@@ -83,6 +95,10 @@ const LiabiltiesCard = () => {
       </Table>
       </div>
     </Card>
+
+    </Col>
+      </Row>  
+    </Container>
   );
 };
 

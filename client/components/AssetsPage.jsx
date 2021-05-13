@@ -11,7 +11,9 @@ const AssetsPage = () => {
     <Container align="center">
             <Row className='m-2' align="center">
         <Col lg={8} md={10} sm={12} xs={12}>
+
           <AssetsCard />
+          
         </Col>
         <Col lg={4} md={10} sm={12} xs={12}>
           <Chart3 />

@@ -204,42 +204,32 @@ return (
     </div>
     <div  style={{ padding: '0.5em' }}>
     <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (MSFT): $96.50
+      Microsoft (MSFT): $96.50
     </Button>
     </div>
     <div  style={{ padding: '0.5em' }}>
     <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (LNKD): $140.99
+      LinkedIn (LNKD): $140.99
     </Button>
     </div>
     <div  style={{ padding: '0.5em' }}>
     <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (EVA): $165.81
+      Enviva Partners (EVA): $165.81
     </Button>
     </div>
     <div  style={{ padding: '0.5em' }}>
     <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (SHLD): $19.86
+      VictoryShares (SHLD): $19.86
     </Button>
     </div>
     <div  style={{ padding: '0.5em' }}>
     <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (EVI) $37.83
+      EVI Industries (EVI) $37.83
     </Button>
     </div>
     <div  style={{ padding: '0.5em' }}>
     <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (TCK) $28.51
-    </Button>
-    </div>
-    <div  style={{ padding: '0.5em' }}>
-    <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (AKS): $143.91
-    </Button>
-    </div>
-    <div  style={{ padding: '0.5em' }}>
-    <Button variant="light" size="sm" width={4} onClick={e => myToggleFunction4(e)}>
-      - (INTC): $2841
+      Turkcell (TCK) $28.51
     </Button>
     </div>
     <div  style={{ padding: '0.5em' }}>
