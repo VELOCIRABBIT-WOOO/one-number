@@ -1,10 +1,10 @@
 import React from 'react'
-import * as bulma from "reactbulma";
+// import * as bulma from "reactbulma";
 import StocksList from "./StocksList.jsx";
 import StocksGraph from "./StocksGraph.jsx";
 import StocksLoaderStatus from "./StocksLoaderStatus.jsx";
 
-const stocksUrl = 'ws://stocks.mnet.website/';
+const stocksUrl = 'http://localhost:8080/';
 
 class Dashboard extends React.Component {
 

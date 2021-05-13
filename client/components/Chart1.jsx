@@ -81,6 +81,7 @@ const Chart1 = () => {
           <a
             className='btn btn-gh'
             href='https://github.com/VELOCIRABBIT-WOOO'
+            target="_BLANK"
           >
             Visualize your Finances. Live!
           </a>

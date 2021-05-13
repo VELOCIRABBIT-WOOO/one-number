@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Container, Table } from 'react-bootstrap';
 
+
+
 const dataFromJSON = require('../json_from_plaid/investments-holdings-get.json');
 const accounts = dataFromJSON.holdings.accounts;
 const holdings = dataFromJSON.holdings.holdings;

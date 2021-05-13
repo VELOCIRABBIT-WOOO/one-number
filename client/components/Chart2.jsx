@@ -37,12 +37,13 @@ const Chart2 = () => (
         <a
           className='btn btn-gh'
           href='https://github.com/VELOCIRABBIT-WOOO'
+          target="_BLANK"
         >
           <h6 className='title'>Total Assets: $68,473</h6>
         </a>
       </div>
     </div>
-    <Doughnut data={data} boxHeight={12} />
+    <Doughnut data={data} />
   </>
 );
 
