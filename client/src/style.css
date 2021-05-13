@@ -1,6 +1,7 @@
 body, html {
   height: 100%;
   }
+  
   .bg {
   background-image: url("./bg.jpg");
   height: 100vh;
@@ -8,11 +9,3 @@ body, html {
   background-repeat: no-repeat;
   background-size: cover;
   }
-h1 {
-  color: teal;
-}
-/* 
-.navbar {
-  float: right;
-  text-align: right;
-} */

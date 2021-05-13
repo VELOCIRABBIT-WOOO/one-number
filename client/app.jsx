@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ReactDom from 'react-dom';
 import {
   BrowserRouter as Router,
@@ -10,34 +10,45 @@ import {
 import NavbarContainer from './components/NavbarContainer.jsx';
 import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CardsContainer from './components/CardsContainer.jsx';
 import LandingContainer from './components/LandingContainer.jsx';
+import Dashboaord from './components/Dashboard.jsx';
+import SpaceFiller from './components/SpaceFiller.jsx'
 
-// if we putcards and space filler into one component called dashboard we can use that as a route
-const Dashboard = () => {
-  return (
-    <Container>
-      <CardsContainer />
-    </Container>
-  );
-};
-// otherwise landing will render a jumbotron
 
 const App = () => {
+
+  const [accessToken, setAccessToken] = useState();
+  const [result, setResult] = useState();
+  const [transactions, setTransactions] = useState([]);
+  const [accounts, setAccounts] = useState([]);
+
+  useEffect(() => {
+      fetch("/checkauth")
+      .then(result => result.json())
+      .then(data => {
+        const {result} = data;
+        setAccounts(result.accounts);
+        setTransactions(result.transactions);
+    })
+  },[])
+
+
   return (
-    <BrowserRouter>
+    <BrowserRouter>      
       <div>
         <Container>
           <div>
-            <NavbarContainer />
+            <NavbarContainer accounts = {accounts} setAccounts = {setAccounts} accessToken = {accessToken} setAccessToken = {setAccessToken}/>
           </div>
-          <Route exact path="/" component={LandingContainer}></Route>
-          <Route exact path="/landing" component={LandingContainer}></Route>
-          <Route exact path="/dashboard" component={Dashboard}></Route>
+          <Route exact path="/" component={LandingContainer}/>
+          <Route exact path="/landing" component={LandingContainer}/>
+          <Route exact path="/dashboard">
+            <Dashboaord accounts = {accounts}/>
+          </Route>
         </Container>
       </div>
-    </BrowserRouter>
-  );
-};
+    </BrowserRouter>    
+  )
+} 
 
 export default App;

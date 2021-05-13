@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 
 module.exports = {
   entry: "./client/index.js",
@@ -20,6 +21,8 @@ module.exports = {
       "/secret": "http://localhost:3000",
       "/landing": "http://localhost:3000",
       "/dashboard": "http://localhost:3000",
+      "/checkauth": "http://localhost:3000",
+      "/plaid/**": "http://localhost:3000",
     },
   },
   module: {
@@ -34,6 +37,24 @@ module.exports = {
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        type: 'asset',
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [
+          {
+            loader: ImageMinimizerPlugin.loader,
+            options: {
+              severityError: 'warning', // Ignore errors on corrupted images
+              minimizerOptions: {
+                plugins: ['gifsicle'],
+              },
+            },
+          },
+        ],
       },
     ],
   },

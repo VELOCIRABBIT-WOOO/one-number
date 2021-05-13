@@ -32,8 +32,9 @@ const LiabiltiesCard = () => {
   const LiabilityTotal = formatter.format(total)
 
   return (
-    <Card className='h-100'>
-      <Card.Header>Liabilities</Card.Header>
+    <Card className='h-100' border="danger" style={{ padding: '0.5rem' }}>
+      <Card.Header align='center'><h5>Liabilities</h5></Card.Header>
+      <div align='center'><h6>{`Total: ${LiabilityTotal}`}</h6></div>
       <Table striped bordered hover>
       <thead>
         <tr>
@@ -63,7 +64,7 @@ const LiabiltiesCard = () => {
           
       </tbody>
       </Table>
-      <Card.Footer >{`Combined Total: ${LiabilityTotal}`}</Card.Footer>
+      {/* <Card.Footer >{`Combined Total: ${LiabilityTotal}`}</Card.Footer> */}
     </Card>
   );
 };

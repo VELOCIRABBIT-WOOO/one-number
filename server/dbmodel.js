@@ -18,6 +18,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   google_id: { type: String, required: true },
   display_name: { type: String, required: true },
+  access_token: { type: String, required: false },
   items: {
     type: [
       {

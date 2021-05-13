@@ -3,19 +3,8 @@ import { Card, Container, Table } from "react-bootstrap";
 
 const dataFromJSON = require("../json_from_plaid/investments-holdings-get.json");
 
-const AssetsCard = () => {
-  // const [assets, setAssests] = useState('')
+const AssetsCard = (props) => {
 
-  // useEffect(() => {
-  //    fetch("investments-holdings-get.json")
-  //         .then(res => {
-  //             setAssests(res.holdings);
-  //             console.log(assets)
-  //         })
-  //         .catch(err => console.log(err));
-  // }, []);
-
-  const accounts = dataFromJSON.holdings.accounts;
   const holdings = dataFromJSON.holdings.holdings;
   const securities = dataFromJSON.holdings.securities;
 
@@ -63,26 +52,27 @@ const AssetsCard = () => {
 
   const amassTotals = () => {
     let totals = 0;
-    accounts
-      .filter((el) => el.type === "depository" || el.type === "investment")
-      .forEach((el) => {
-        totals += el.balances.current;
-      });
+    // accounts
+    //   .filter((el) => el.type === "depository" || el.type === "investment")
+    //   .forEach((el) => {
+    //     totals += el.balances.current;
+    //   });
     groupedSecurities.forEach((el) => {
       totals += el.value;
     });
     return totals;
   };
 
-  const amassAccountHoldings = () => {
-    let totals = 0;
-    accounts
-      .filter((el) => el.type === "depository" || el.type === "investment")
-      .forEach((el) => {
-        totals += el.balances.current;
-      });
-    return totals;
-  };
+  // const amassAccountHoldings = () => {
+  //   let totals = 0;
+  //   accounts
+  //     .filter((el) => el.type === "depository" || el.type === "investment")
+  //     .forEach((el) => {
+  //       totals += el.balances.current;
+  //     });
+  //   console.log('amassAccountHoldings',totals)
+  //   return totals;
+  // };
 
   const amassSecuritiesHoldings = () => {
     let totals = 0;
@@ -94,7 +84,7 @@ const AssetsCard = () => {
 
   //numbers to be formatted by formatter
   const securitiesOnlyTotal = amassSecuritiesHoldings();
-  const accountOnlyHoldings = amassAccountHoldings();
+  // const accountOnlyHoldings = amassAccountHoldings();
   const total = amassTotals();
 
   const formatter = new Intl.NumberFormat("en-US", {
@@ -104,83 +94,125 @@ const AssetsCard = () => {
   });
 
   const securitiesHoldings = formatter.format(securitiesOnlyTotal);
-  const accountTotals = formatter.format(accountOnlyHoldings);
+  // const accountTotals = formatter.format(accountOnlyHoldings);
   const Assetotal = formatter.format(total);
 
-  return (
-    <Card>
-      <Card.Header>Assets</Card.Header>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Account</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {accounts
-            .filter(
-              (el) => el.type === "depository" || el.type === "investment"
-            )
-            .map((asset) => {
+  if(props.accounts[0]){
+    
+    const account = props.accounts
+    const accountInformation =[];
+    let total = 0;
+    for(let i = 0; i < props.accounts.length;i++){
+      accountInformation.push(
+        <tr key = {props.accounts[i].subtype}>
+          <td>{props.accounts[i].subtype}</td>
+          <td>{`$${props.accounts[i].balances.available}`}</td>
+        </tr>
+      );
+
+      total += props.accounts[i].balances.available;
+    }
+
+    return (
+      <Card className='h-100' border="success" style={{ padding: '0.5rem' }}>
+        <Card.Header align='center'><h5>Assets</h5></Card.Header>
+        <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {accountInformation}
+            <tr>
+              <td>Total:</td>
+              <td>{`$${total}`}</td>
+            </tr>
+          </tbody>
+        </Table>
+        <Table striped bordered hover style={{ width: '100%' }}>
+          <thead>
+            <tr>
+              <th>Holdings</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groupedSecurities.map((asset) => {
               let dollarUSLocale = Intl.NumberFormat("en-US", {
                 style: "currency",
                 currency: "USD",
                 maximumFractionDigits: 2,
               });
-              let price = dollarUSLocale.format(asset.balances.current);
+              let price = dollarUSLocale.format(asset.value);
               return [
                 <tr key={asset.name}>
-                  <td>{asset.name.slice(6)}: </td>
+                  <td>{asset.name}:</td>
                   <td>{price}</td>
                 </tr>,
               ];
             })}
-          <tr>
-            <td>Total:</td>
-            <td>{accountTotals}</td>
-          </tr>
-        </tbody>
-      </Table>
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Holdings</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {groupedSecurities.map((asset) => {
-            let dollarUSLocale = Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              maximumFractionDigits: 2,
-            });
-            let price = dollarUSLocale.format(asset.value);
-            return [
-              <tr key={asset.name}>
-                <td>{asset.name}:</td>
-                <td>{price}</td>
-              </tr>,
-            ];
-          })}
-          <tr>
-            <td>Total:</td>
-            <td>{securitiesHoldings}</td>
-          </tr>
-        </tbody>
-      </Table>
-      <Card.Footer>{`Combined Total: ${Assetotal}`}</Card.Footer>
-    </Card>
-  );
-};
+            <tr>
+              <td>Total:</td>
+              <td>{securitiesHoldings}</td>
+            </tr>
+          </tbody>
+        </Table>
+      </Card>
+    );
+  } else {
+    return (
+      <Card className='h-100' border="success" style={{ padding: '0.5rem' }}>
+        <Card.Header align='center'><h5>Assets</h5></Card.Header>
+        <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
+        <Table striped bordered hover>
+          <thead>
+            <tr>
+              <th>Account</th>
+              <th>Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total:</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </Table>
+        <Table striped bordered hover style={{ width: '100%' }}>
+          <thead>
+            <tr>
+              <th>Holdings</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groupedSecurities.map((asset) => {
+              let dollarUSLocale = Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+                maximumFractionDigits: 2,
+              });
+              let price = dollarUSLocale.format(asset.value);
+              return [
+                <tr key={asset.name}>
+                  <td>{asset.name}:</td>
+                  <td>{price}</td>
+                </tr>,
+              ];
+            })}
+            <tr>
+              <td>Total:</td>
+              <td>{securitiesHoldings}</td>
+            </tr>
+          </tbody>
+        </Table>
+      </Card>
+    );
+  }
+}
+
 
 export default AssetsCard;
-
-// groupedSecurities.map((asset) => {
-//   //           return [
-//   //             <Card.Text key={asset.name}>
-//   //               {`${asset.name}: `} {`$${asset.value}`}
-//   //             </Card.Text>,
-//   //           ];
-//   //         })}

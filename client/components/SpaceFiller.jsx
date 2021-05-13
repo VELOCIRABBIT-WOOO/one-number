@@ -4,15 +4,15 @@ import { usePlaidLink } from "react-plaid-link";
 import { Helmet } from "react-helmet";
 
 const SpaceFiller = (props) => {
+
   const createPlaidStuff = () => {
-    // console.log(Plaid);
+
     fetch("/plaid/get_link_token")
       .then((response) => response.json())
       .then(({ linkToken }) => {
         const handler = Plaid.create({
           token: linkToken,
           onSuccess: (public_token, metadata) => {
-            console.log("on success");
             fetch("/plaid/plaid_token_exchange", {
               method: "POST",
               headers: {
@@ -20,7 +20,6 @@ const SpaceFiller = (props) => {
               },
               body: JSON.stringify({
                 public_token,
-                // metadata,
               }),
             })
               .then((data) => data.json())
@@ -29,7 +28,6 @@ const SpaceFiller = (props) => {
           },
           onLoad: () => {},
           onExit: (error, metadata) => {
-            // console.log('error occured on plaid create');
             // Save data from the onExit handler
             supportHandler.report({
               error: error,
@@ -40,17 +38,17 @@ const SpaceFiller = (props) => {
             });
           },
           onEvent: (eventName, metadata) => {
-            // send event and metadata to self-hosted analytics
-            // console.log('event happened');
-            // console.log(eventName);
-            // console.log(metadata);
+
           },
           receivedRedirectUri: null,
         });
         handler.open();
-        // sethandlerFunc(handler);
-      });
+      })
   };
+
+
+
+
 
   return (
     <div>
@@ -61,7 +59,7 @@ const SpaceFiller = (props) => {
         />
       </Helmet>
       {/* <button onClick={() => console.log('test')}>button</button> */}
-      <Button type="submit" onClick={createPlaidStuff}>
+      <Button type="submit" onClick={createPlaidStuff} variant='light'>
         Connect a bank account
       </Button>
     </div>

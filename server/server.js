@@ -9,85 +9,92 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const keys = require("../api_keys.js");
 require("dotenv").config();
 const { User, Item, Account, Security, Holding } = require("./dbmodel");
+const plaid = require("plaid");
+const {decrypt} = require('./encryptDecrypt')
 const plaidRouter = require("./routes/plaidRouter");
 const authRouter = require("./routes/authRouter");
 const authController = require("./controllers/authController");
+const cookieParser = require('cookie-parser');
+const { Error } = require("mongoose");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "../build/")));
+
 app.use(
   cookieSession({
     maxAge: 24 * 60 * 60 * 1000,
     keys: [keys.session.cookieKey],
   })
 );
+
 app.use("/plaid", plaidRouter);
+app.use(cookieParser());
+
+const client = new plaid.Client({
+  clientID: process.env.PLAID_CLIENT_ID,
+  secret: process.env.PLAID_SECRET,
+  env: plaid.environments.development
+});
+
+app.post('/plaid/webhook', (req, res) => {
+  console.log('Plaid Webhook',req.body) // Call your action on the request here
+  res.status(200).end() // Responding is important
+})
+
 // ---------------------oauth
 app.use(passport.initialize());
 app.use(passport.session());
 app.use("/auth", authRouter);
-// Secret route
-app.get("/secret", authController.isUserAuthenticated, (req, res) => {
-  // recieved in res.locals.user from isUserAuthenticated which is just a long google ID
-  if (res.locals.user) res.send(res.locals.user);
-  else {
-    res.send("no user found");
-  }
-});
+// ---------------------oauth
+
 app.get("/", (req, res) => {
   res.redirect("/landing");
 });
+
 app.get("/dashboard", (req, res) => {
-  if (req.user) {
-    res.sendFile(path.join(__dirname, "./../build/index.html"));
-  } else {
-    res.redirect("/landing");
-  }
+  if (req.cookies['google_id']) res.sendFile(path.join(__dirname, "./../build/index.html"));
+  else res.redirect("/landing");
 });
+
 app.get("/landing", (req, res) => {
   res.sendFile(path.join(__dirname, "./../build/index.html"));
 });
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: keys.google.clientID,
-      clientSecret: keys.google.clientSecret,
-      callbackURL: "/auth/google/callback",
-    },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ google_id: profile.id }).then((currentUser) => {
-        if (currentUser) {
-          //if we already have a record with the given profile ID
-          done(null, currentUser);
-        } else {
-          //if not, create a new user
-          new User({
-            google_id: profile.id,
-            display_name: profile.displayName,
-          })
-            .save()
-            .then((newUser) => {
-              done(null, newUser);
-            });
-        }
-      });
-      // console.log("access token: ", accessToken);
-      // console.log("profile: ");
-      // console.log(profile);
-      done(null, profile); // TODO add the user to the database here with upsert, or insert on conflict do nothing sql
+
+// Secret route
+app.get('/secret', (req, res) => {
+  userID = req.cookies['google_id'];
+  res.send(userID);
+});
+
+app.get("/checkauth", (req, res, next) => {
+  const { google_id } = req.cookies;
+  User.findOne({google_id : google_id}, (err, result) => {
+    if(err !== null || result === null){
+      return next()
+    } else {
+      res.locals.access_token = result.access_token;
+      return next();
     }
-  )
-);
-passport.serializeUser((user, done) => {
-  // console.log("serialize user is called");
-  done(null, user.id); // this user is coming from the done function passed from returning from the db
-});
-passport.deserializeUser((id, done) => {
-  // console.log("deserialize user is called");
-  // find from the database and send user data here
-  done(null, id); // this user is coming from the done function passed from returning from the db
-});
-// -------------------------------oauth
+  })},
+  (req, res) => {
+    const upperLimitDate = (new Date()).toISOString().split('T')[0];
+    const lowerLimitDate = String(parseInt(upperLimitDate.split('-')[0]) - 1) + '-' + upperLimitDate.split('-')[1] + '-' + upperLimitDate.split('-')[2];
+    client.getTransactions(
+    decrypt(res.locals.access_token),
+    lowerLimitDate,
+    upperLimitDate,
+    (err, results) => {
+      if(err !== null) console.log(err);
+      else{
+        const result = results;
+        const access_token = res.locals.access_token;
+        res.status(200).send({result})
+      }
+    }
+)});
+
+
 app.listen(port, () => {
   console.log(`Server is listening at http://localhost:${port}`);
 });
+
