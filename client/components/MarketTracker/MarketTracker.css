@@ -1,0 +1,70 @@
+.container{
+  margin-top: 30px !important;
+  margin-bottom: 20px !important;
+}
+
+.card-header{
+  background: #4a4a4a;
+  border-radius: 1px;
+}
+
+.card-header-title{
+  color: white !important;
+}
+
+#stocks_list .card-content{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+#stocks_list table{
+  width: 100%;
+  margin: 3px;
+}
+
+.red{
+  color: red;
+}
+
+.green{
+  color: green;
+}
+
+.selected{
+  background: #4dabf559;
+  box-shadow: 1px 1px 5px #5555557d inset;
+}
+
+tbody tr, button{
+  cursor: pointer;
+}
+
+td.updated_at{
+  font-size: 12px;
+}
+
+.icon.market-trend{
+  background: #e2e2e2;
+  border-radius: 5px;
+  margin-left: 3px;
+}
+
+.up-arrow{
+  color: green;
+}
+
+.down-arrow{
+  color: red;
+}
+.unsafe_script_warning{
+  margin-bottom: 20px;
+}
+.has-background-success{
+  background: green;
+  color: white;
+}
+.modal-content{
+  background: white;
+  padding: 30px;
+  border-radius: 5px;
+  font-size: 20px;
+}

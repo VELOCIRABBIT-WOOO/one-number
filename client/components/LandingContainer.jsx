@@ -42,7 +42,7 @@ const LandingContainer = () => {
       <h3>Quick overview of your finances</h3>
       <p>Let's compare your assets vs. liabilities. Visualize your financial situation.</p>
       <p>
-        <Button href="/dashboard" variant="secondary">
+        <Button href="/auth/google" variant="secondary">
           Real Time Analisis
         </Button>
       </p>
@@ -60,7 +60,7 @@ const LandingContainer = () => {
       <h3>Investment opportunities</h3>
       <p>Follow the market, and take action towards your finanacial</p>
       <p>
-        <Button href="/market" variant="dark">
+        <Button href="/markets" variant="dark">
           Stock Market
         </Button>
       </p>

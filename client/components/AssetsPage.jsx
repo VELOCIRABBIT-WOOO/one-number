@@ -9,12 +9,12 @@ const AssetsPage = () => {
   return (
     <Container align="center">
             <Row className='m-2' align="center">
-        {/* <Col lg={8} md={10} sm={12} xs={12}> */}
-        <Col>
+        <Col lg={8} md={10} sm={12} xs={12}>
           <AssetsCard />
         </Col>
-        <Col>
-
+        <Col lg={4} md={10} sm={12} xs={12}>
+          <Chart2 />
+          <Chart1 />
         </Col>
         
       </Row>  

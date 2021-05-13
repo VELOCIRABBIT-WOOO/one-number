@@ -10,7 +10,11 @@ const LiabilitiesPage = () => {
   return (
     <Container align="center">
       <Row className='m-2' align="center">
-        <Col>
+        <Col lg={4} md={10} sm={12} xs={12}>
+          <Chart2 />
+          <Chart1 />
+        </Col>
+        <Col lg={8} md={10} sm={12} xs={12}>
           <LiabilitiesCard />
         </Col>
       </Row>  
