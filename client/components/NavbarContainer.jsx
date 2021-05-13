@@ -33,12 +33,12 @@ const NavbarContainer = () => {
             <Nav.Link href="/liabilities">Liabilites</Nav.Link>
             <Nav.Link href="/dashboard">Dashboard</Nav.Link>
             <Nav.Link href="/markets">Markets</Nav.Link>
+            <PlaidLinkButton />
             <Nav.Link
               href="/auth/logout"
             >
               &nbsp; Logout &nbsp; 
             </Nav.Link>
-            <PlaidLinkButton />
           </Nav>
         </div>
       );

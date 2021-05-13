@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import { Card, Container, Table, Button, Modal } from 'react-bootstrap';
 
 const dataFromJSON = require('../json_from_plaid/investments-holdings-get.json');
+const dataFromJSONTransaction = require('../json_from_plaid/transactions-get.json');
+
 
 const LiabiltiesCard = () => {
   
@@ -15,7 +17,7 @@ const LiabiltiesCard = () => {
   .filter((el) => el.type === 'loan' || el.type === 'credit')
     .forEach((el) => {
       totals += el.balances.current;
-      console.log("This is the data we're receving from static JSON", dataFromJSON);
+      console.log("This is the data we're receving from static JSON transaction", dataFromJSONTransaction);
     });
 
     return totals

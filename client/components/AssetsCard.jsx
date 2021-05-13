@@ -72,6 +72,7 @@ const AssetsCard = () => {
     groupedSecurities.forEach((el) => {
       totals += el.value;
     });
+    console.log(accounts);
     return totals;
   };
 

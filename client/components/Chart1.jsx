@@ -3,8 +3,22 @@ import { Bar } from 'react-chartjs-2';
 
 const rand = () => Math.floor(Math.random() * 255);
 
+// const months = Array.from({length: 6}, (e, i) => {
+//   return new Date().toLocaleDateString("en", {month: "short", year: "2-digit"});
+// })
+const current = new Date();
+const currMonth = new Date().toLocaleDateString("en", {month: "short" , year: "2-digit"})
+const months = [currMonth];
+
+for (let i = 5; i > 0; i --){
+  current.setMonth(current.getMonth()-1);
+  const previousMonth = current.toLocaleString('default', {month: "short" , year: "2-digit"});
+  months.push(previousMonth)
+}
+
 const genData = () => ({
-  labels: ['January\'21', 'February\'21', 'March\'21', 'April\'21', 'May\'21', 'June\'21', 'July\'21'],
+  
+  labels: months.reverse(),
   datasets: [
     {
       type: 'line',
