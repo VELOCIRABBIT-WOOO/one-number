@@ -1,12 +1,19 @@
 import React from 'react';
-import { CardGroup, Container, Row, Col, Grow } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import LiabilitiesCard from './LiabilitiesCard.jsx';
+
+import Chart1 from './Chart1.jsx';
+import Chart2 from './Chart2.jsx';
 
 
 const LiabilitiesPage = () => {
   return (
-    <Container>
-      <LiabilitiesCard />
+    <Container align="center">
+      <Row className='m-2' align="center">
+        <Col>
+          <LiabilitiesCard />
+        </Col>
+      </Row>  
     </Container>
   );
 };
