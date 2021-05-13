@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Card, Container, Table, Button, Row, Col } from "react-bootstrap";
 
-import Chart1 from './Chart1.jsx';
-import Chart2 from './Chart2.jsx';
-import Chart3 from './Chart3.jsx';
+import Chart1 from "./Chart1.jsx";
+import Chart2 from "./Chart2.jsx";
+import Chart3 from "./Chart3.jsx";
 
 const dataFromJSON = require("../json_from_plaid/investments-holdings-get.json");
 
 const AssetsCard = () => {
-
   const accounts = dataFromJSON.holdings.accounts;
   const holdings = dataFromJSON.holdings.holdings;
   const securities = dataFromJSON.holdings.securities;
@@ -119,92 +118,104 @@ const AssetsCard = () => {
   const accountTotals = formatter.format(accountOnlyHoldings);
   const Assetotal = formatter.format(total);
 
-  
   return (
     <Container align="center">
-    <Row className='m-2' align="center">
+      <Row className="m-2" align="center">
         <Col lg={8} md={10} sm={12} xs={12}>
-
-    <Card border="success" style={{ padding: '0.5rem' }}>
-      <Card.Header align='center'><h5>Assets</h5></Card.Header>
-      <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
-      <Button variant="outline-secondary" size="sm" onClick={e => myToggleFunction(e)}>Account Details</Button>
-      <div id="myDIV">
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th>Account</th>
-            <th>Balance</th>
-          </tr>
-        </thead>
-        <tbody>
-          {accounts
-            .filter(
-              (el) => el.type === "depository" || el.type === "investment"
-            )
-            .map((asset) => {
-              let dollarUSLocale = Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-                maximumFractionDigits: 2,
-              });
-              let price = dollarUSLocale.format(asset.balances.current);
-              return [
-                <tr key={asset.name}>
-                  <td>{asset.name.slice(6)}: </td>
-                  <td>{price}</td>
-                </tr>,
-              ];
-            })}
-          <tr>
-            <td>Total:</td>
-            <td>{accountTotals}</td>
-          </tr>
-        </tbody>
-      </Table>
-      </div>
-      <Button variant="outline-secondary" size="sm" onClick={e => myToggleFunction2(e)}>Holdings Details</Button> 
-      <div id="myDIV2">
-
-      <Table striped bordered hover style={{ width: '100%' }}>
-        <thead>
-          <tr>
-            <th>Holdings</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-          {groupedSecurities.map((asset) => {
-            let dollarUSLocale = Intl.NumberFormat("en-US", {
-              style: "currency",
-              currency: "USD",
-              maximumFractionDigits: 2,
-            });
-            let price = dollarUSLocale.format(asset.value);
-            return [
-              <tr key={asset.name}>
-                <td>{asset.name}:</td>
-                <td>{price}</td>
-              </tr>,
-            ];
-          })}
-          <tr>
-            <td>Total:</td>
-            <td>{securitiesHoldings}</td>
-          </tr>
-        </tbody>
-      </Table>
-      </div>
-    </Card>
-
-    </Col>
+          <Card border="success" style={{ padding: "0.5rem" }}>
+            <Card.Header align="center">
+              <h5>Assets</h5>
+            </Card.Header>
+            <div align="center">
+              <h6>{`Total: ${Assetotal}`}</h6>
+            </div>
+            <Button
+              variant="outline-secondary"
+              size="sm"
+              onClick={(e) => myToggleFunction(e)}
+            >
+              Account Details
+            </Button>
+            <div id="myDIV">
+              <Table striped bordered hover>
+                <thead>
+                  <tr>
+                    <th>Account</th>
+                    <th>Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {accounts
+                    .filter(
+                      (el) =>
+                        el.type === "depository" || el.type === "investment"
+                    )
+                    .map((asset) => {
+                      let dollarUSLocale = Intl.NumberFormat("en-US", {
+                        style: "currency",
+                        currency: "USD",
+                        maximumFractionDigits: 2,
+                      });
+                      let price = dollarUSLocale.format(asset.balances.current);
+                      return [
+                        <tr key={asset.name}>
+                          <td>{asset.name.slice(6)}: </td>
+                          <td>{price}</td>
+                        </tr>,
+                      ];
+                    })}
+                  <tr>
+                    <td>Total:</td>
+                    <td>{accountTotals}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
+            <Button
+              variant="outline-secondary"
+              size="sm"
+              onClick={(e) => myToggleFunction2(e)}
+            >
+              Holdings Details
+            </Button>
+            <div id="myDIV2">
+              <Table striped bordered hover style={{ width: "100%" }}>
+                <thead>
+                  <tr>
+                    <th>Holdings</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {groupedSecurities.map((asset) => {
+                    let dollarUSLocale = Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD",
+                      maximumFractionDigits: 2,
+                    });
+                    let price = dollarUSLocale.format(asset.value);
+                    return [
+                      <tr key={asset.name}>
+                        <td>{asset.name}:</td>
+                        <td>{price}</td>
+                      </tr>,
+                    ];
+                  })}
+                  <tr>
+                    <td>Total:</td>
+                    <td>{securitiesHoldings}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            </div>
+          </Card>
+        </Col>
         <Col lg={4} md={10} sm={12} xs={12}>
           <Chart3 />
           <Chart2 />
           <Chart1 />
         </Col>
-        
-      </Row>  
+      </Row>
     </Container>
   );
 };
