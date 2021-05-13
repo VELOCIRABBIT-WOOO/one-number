@@ -10,16 +10,15 @@ import {
   Button,
   FormControl,
 } from 'react-bootstrap';
-import PlaidLinkButton from './SpaceFiller.jsx';
+import SpaceFiller from './SpaceFiller.jsx';
 
-const NavbarContainer = () => {
+const NavbarContainer = (props) => {
   const [user, setUser] = useState('');
 
   const getAuthedStatus = () => {
     fetch('/secret')
       .then((response) => response.json())
       .then((response) => {
-        // console.log(typeof response);
         setUser(response);
       });
   };
@@ -36,7 +35,7 @@ const NavbarContainer = () => {
             >
               &nbsp; Logout &nbsp; 
             </Nav.Link>
-            <PlaidLinkButton />
+            <SpaceFiller accounts = {props.accounts} setAccounts = {props.setAccounts} accessToken = {props.accessToken} setAccessToken = {props.setAccessToken}/>
           </Nav>
         </div>
       );

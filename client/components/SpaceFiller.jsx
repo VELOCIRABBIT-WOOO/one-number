@@ -4,15 +4,15 @@ import { usePlaidLink } from "react-plaid-link";
 import { Helmet } from "react-helmet";
 
 const SpaceFiller = (props) => {
+
   const createPlaidStuff = () => {
-    // console.log(Plaid);
+
     fetch("/plaid/get_link_token")
       .then((response) => response.json())
       .then(({ linkToken }) => {
         const handler = Plaid.create({
           token: linkToken,
           onSuccess: (public_token, metadata) => {
-            console.log("on success");
             fetch("/plaid/plaid_token_exchange", {
               method: "POST",
               headers: {
@@ -20,16 +20,14 @@ const SpaceFiller = (props) => {
               },
               body: JSON.stringify({
                 public_token,
-                // metadata,
               }),
             })
               .then((data) => data.json())
-              .then((resp) => console.log(resp))  // ! Make sure it's recorded in the State
+              .then((resp) => console.log(resp))
               .catch((e) => console.log(e));
           },
           onLoad: () => {},
           onExit: (error, metadata) => {
-      
             // Save data from the onExit handler
             supportHandler.report({
               error: error,
@@ -40,17 +38,17 @@ const SpaceFiller = (props) => {
             });
           },
           onEvent: (eventName, metadata) => {
-            // send event and metadata to self-hosted analytics
-            // console.log('event happened');
-            // console.log(eventName);
-            // console.log(metadata);
+
           },
           receivedRedirectUri: null,
         });
         handler.open();
-        // sethandlerFunc(handler);
-      });
+      })
   };
+
+
+
+
 
   return (
     <div>

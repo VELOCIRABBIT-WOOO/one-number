@@ -21,6 +21,8 @@ module.exports = {
       "/secret": "http://localhost:3000",
       "/landing": "http://localhost:3000",
       "/dashboard": "http://localhost:3000",
+      "/checkauth": "http://localhost:3000",
+      "/plaid/**": "http://localhost:3000",
     },
   },
   module: {

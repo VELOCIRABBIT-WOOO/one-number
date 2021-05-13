@@ -4,13 +4,14 @@ import AssetsCard from './AssetsCard.jsx';
 import LiabilitiesCard from './LiabilitiesCard.jsx';
 import NetWorthCard from './NetWorthCard.jsx';
 
-const CardsContainer = () => {
+const CardsContainer = (props) => {
+  
   return (
     <Container>
       <Row className='m-2'>
         {/* <CardGroup> */}
         <Col xs={12} md={4}>
-          <AssetsCard />
+          <AssetsCard accounts = {props.accounts}/>
         </Col>
         <Col xs={12} md={4}>
           <LiabilitiesCard />
