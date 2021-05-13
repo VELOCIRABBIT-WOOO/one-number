@@ -53,7 +53,8 @@ const LiabiltiesCard = () => {
       <>
       <Button variant="outline-secondary" size="sm" onClick={handleShow}>Details</Button>
       <Modal show={show} onHide={handleClose}>
-
+     
+  
       <Table striped bordered hover>
       <thead>
         <tr>
@@ -65,24 +66,29 @@ const LiabiltiesCard = () => {
           {accounts
             .filter(
               (el) => el.type === 'loan' || el.type === 'credit')
-            .map((asset) => {
-              let dollarUSLocale = Intl.NumberFormat('en-US',{
-                style: "currency",
-                currency: "USD",
-                maximumFractionDigits: 2
-              })
-              let price = dollarUSLocale.format(asset.balances.current)
-              return [
-                <tr key={asset.name}>
+              .map((asset) => {
+                let dollarUSLocale = Intl.NumberFormat('en-US',{
+                  style: "currency",
+                  currency: "USD",
+                  maximumFractionDigits: 2
+                })
+                let price = dollarUSLocale.format(asset.balances.current)
+                return [
+                  <tr key={asset.name}>
                   <td>{asset.name.slice(6)}: </td>
                   <td>{price}</td>
                 </tr>,
             
-              ];
-            })}
+          ];
+        })}
           
       </tbody>
       </Table>
+      <Modal.Dialog>
+      <Modal.Footer>
+        <Button variant="secondary" size="sm" onClick={handleClose}>Close</Button>
+      </Modal.Footer>
+      </Modal.Dialog>
       </Modal>
       </>
     </Card>

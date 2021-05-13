@@ -180,7 +180,11 @@ const AssetsCard = () => {
           </tr>
         </tbody>
       </Table>
-     
+      <Modal.Dialog>
+      <Modal.Footer>
+        <Button variant="secondary" size="sm" onClick={handleClose}>Close</Button>
+      </Modal.Footer>
+      </Modal.Dialog>
       </Modal>
       </>
     </Card>
