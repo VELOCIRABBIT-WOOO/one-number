@@ -1,20 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Card, Container, Table, Button, Modal } from "react-bootstrap";
+import { Card, Container, Table, Button } from "react-bootstrap";
 
 const dataFromJSON = require("../json_from_plaid/investments-holdings-get.json");
 
 const AssetsCard = () => {
-  // const [assets, setAssests] = useState('')
-
-  // useEffect(() => {
-  //    fetch("investments-holdings-get.json")
-  //         .then(res => {
-  //             setAssests(res.holdings);
-  //             console.log(assets)
-  //         })
-  //         .catch(err => console.log(err));
-  // }, []);
-
 
   const accounts = dataFromJSON.holdings.accounts;
   const holdings = dataFromJSON.holdings.holdings;
@@ -93,6 +82,24 @@ const AssetsCard = () => {
     return totals;
   };
 
+  function myToggleFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+  function myToggleFunction2() {
+    var x = document.getElementById("myDIV2");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
   //numbers to be formatted by formatter
   const securitiesOnlyTotal = amassSecuritiesHoldings();
   const accountOnlyHoldings = amassAccountHoldings();
@@ -108,18 +115,13 @@ const AssetsCard = () => {
   const accountTotals = formatter.format(accountOnlyHoldings);
   const Assetotal = formatter.format(total);
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+  
   return (
     <Card border="success" style={{ padding: '0.5rem' }}>
       <Card.Header align='center'><h5>Assets</h5></Card.Header>
       <div align='center'><h6>{`Total: ${Assetotal}`}</h6></div>
-      <>
-      <Button variant="outline-secondary" size="sm" onClick={handleShow}>Details</Button>
-      <Modal show={show} onHide={handleClose}>
-
+      <Button variant="outline-secondary" size="sm" onClick={e => myToggleFunction(e)}>Account Details</Button>
+      <div id="myDIV">
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -152,6 +154,10 @@ const AssetsCard = () => {
           </tr>
         </tbody>
       </Table>
+      </div>
+      <Button variant="outline-secondary" size="sm" onClick={e => myToggleFunction2(e)}>Holdings Details</Button> 
+      <div id="myDIV2">
+
       <Table striped bordered hover style={{ width: '100%' }}>
         <thead>
           <tr>
@@ -180,9 +186,7 @@ const AssetsCard = () => {
           </tr>
         </tbody>
       </Table>
-     
-      </Modal>
-      </>
+      </div>
     </Card>
   );
 };

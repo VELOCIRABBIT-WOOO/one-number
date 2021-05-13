@@ -1,6 +1,6 @@
 
 import React, {useState} from 'react';
-import { Card, Container, Table, Button, Modal } from 'react-bootstrap';
+import { Card, Container, Table, Button } from 'react-bootstrap';
 
 const dataFromJSON = require('../json_from_plaid/investments-holdings-get.json');
 
@@ -50,10 +50,8 @@ const LiabiltiesCard = () => {
     <Card border="danger" style={{ padding: '0.5rem' }}>
       <Card.Header align='center'><h5>Liabilities</h5></Card.Header>
       <div align='center'><h6>{`Total: ${LiabilityTotal}`}</h6></div>
-      <>
-      <Button variant="outline-secondary" size="sm" onClick={handleShow}>Details</Button>
-      <Modal show={show} onHide={handleClose}>
-
+      <Button variant="outline-secondary" size="sm" onClick={e => myToggleFunction3(e)}>Liabilities Details</Button>
+      <div id="myDIV3">
       <Table striped bordered hover>
       <thead>
         <tr>
@@ -83,8 +81,7 @@ const LiabiltiesCard = () => {
           
       </tbody>
       </Table>
-      </Modal>
-      </>
+      </div>
     </Card>
   );
 };

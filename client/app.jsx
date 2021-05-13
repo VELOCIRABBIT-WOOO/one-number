@@ -12,9 +12,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardsContainer from './components/CardsContainer.jsx';
 import LandingContainer from './components/LandingContainer.jsx';
-import AssetsPage from './components/AssetsPage.jsx';
+import AssetsPage2 from './components/AssetsPage2.jsx';
 import MarketPage from './components/MarketPage.jsx';
-import LiabilitiesPage from './components/LiabilitiesPage.jsx';
+import LiabilitiesPage2 from './components/LiabilitiesPage2.jsx';
 
 // if we putcards and space filler into one component called dashboard we can use that as a route
 const Dashboard = () => {
@@ -37,9 +37,9 @@ const App = () => {
           <Route exact path="/" component={LandingContainer}></Route>
           <Route exact path="/landing" component={LandingContainer}></Route>
           <Route exact path="/dashboard" component={Dashboard}></Route>
-          <Route exact path="/assets" component={AssetsPage}></Route>
+          <Route exact path="/assets" component={AssetsPage2}></Route>
           <Route exact path="/markets" component={MarketPage}></Route>
-          <Route exact path="/liabilities" component={LiabilitiesPage}></Route>
+          <Route exact path="/liabilities" component={LiabilitiesPage2}></Route>
         </Container>
       </div>    
     </BrowserRouter>
