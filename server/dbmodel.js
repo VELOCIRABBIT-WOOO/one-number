@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const keys = require('./api_keys.js');
+const keys = require('../api_keys.js');
 const MONGO_URI = keys.mongoURI;
 
 mongoose
@@ -18,6 +18,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   google_id: { type: String, required: true },
   display_name: { type: String, required: true },
+  access_token: { type: String, required: false },
   items: {
     type: [
       {
