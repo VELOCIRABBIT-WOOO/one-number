@@ -27,6 +27,10 @@ app.use(
   })
 );
 
+
+const memory = process.memoryUsage()
+console.log()
+
 app.use("/plaid", plaidRouter);
 app.use(cookieParser());
 
